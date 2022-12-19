@@ -9,12 +9,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Getter
 public enum Type {
-    SINGLE_LINE_TEXT("single line text"),
-    MULTILINE_TEXT("multiline text"),
-    RADIO_BUTTON("radio button"),
-    CHECKBOX("checkbox"),
-    COMBOBOX("combobox"),
-    DATE("date");
+    SINGLE_LINE_TEXT("Single line text"),
+    MULTILINE_TEXT("Multiline text"),
+    RADIO_BUTTON("Radio button"),
+    CHECKBOX("Checkbox"),
+    COMBOBOX("Combobox"),
+    DATE("Date");
 
     private final String info;
     private static final Map<String, Type> lookup = new HashMap<>();

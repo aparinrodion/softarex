@@ -8,4 +8,6 @@ public interface QuestionnairesService {
     Questionnaire save(Questionnaire questionnaire, Long authorId);
 
     List<Questionnaire> getByAuthorId(Long authorId);
+
+    boolean isUserOwnerOfQuestionnaire(String email, Long id);
 }

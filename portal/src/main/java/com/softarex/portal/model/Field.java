@@ -5,13 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
-
-import static org.hibernate.annotations.CascadeType.ALL;
 
 @Getter
 @Setter
@@ -34,6 +30,5 @@ public class Field {
     @Column(name = "questionnaire_id")
     private Long questionnaireId;
     @OneToMany(mappedBy = "field", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    //TODO ?
     private List<Option> options;
 }

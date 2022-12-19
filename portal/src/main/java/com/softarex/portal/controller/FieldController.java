@@ -5,10 +5,9 @@ import com.softarex.portal.mapper.FieldMapper;
 import com.softarex.portal.model.Field;
 import com.softarex.portal.service.FieldService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,7 +16,7 @@ public class FieldController {
     private final FieldService fieldService;
     private final FieldMapper fieldMapper;
 
-    //TODO check if user is owner of questionnaire
+    @Secured("ROLE_USER")
     @PostMapping
     public FieldDto save(@RequestBody FieldDto fieldDto) {
         Field field = fieldMapper.mapToEntity(fieldDto);
@@ -25,5 +24,19 @@ public class FieldController {
         return fieldMapper.mapToDto(savedField);
     }
 
+    @Secured("ROLE_USER")
+    @PreAuthorize(value = "@securityServiceImpl.isUserOwnerOfField(authentication.principal, #fieldDto.id)")
+    @PostMapping("/update")
+    public FieldDto update(@RequestBody FieldDto fieldDto) {
+        Field field = fieldMapper.mapToEntity(fieldDto);
+        Field updatedField = fieldService.update(field);
+        return fieldMapper.mapToDto(updatedField);
+    }
 
+    @Secured("ROLE_USER")
+    @PreAuthorize(value = "@securityServiceImpl.isUserOwnerOfField(authentication.principal, #id)")
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable Long id) {
+        fieldService.delete(id);
+    }
 }

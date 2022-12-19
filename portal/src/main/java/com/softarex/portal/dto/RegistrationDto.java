@@ -3,7 +3,6 @@ package com.softarex.portal.dto;
 import lombok.Data;
 
 @Data
-//TODO validation
 public class RegistrationDto {
     private String email;
     private String password;

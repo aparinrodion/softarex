@@ -10,6 +10,7 @@ import com.softarex.portal.service.QuestionnairesService;
 import com.softarex.portal.service.impl.FieldServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,7 @@ public class QuestionnairesController {
     }
 
     @Secured("ROLE_USER")
+    @PreAuthorize(value = "@securityServiceImpl.isUserOwnerOfQuestionnaire(authentication.principal,#id)")
     @GetMapping("/{id}")
     public List<FieldDto> getFields(@PathVariable Long id) {
         return fieldService.getFieldsByQuestionnaireId(id).stream()

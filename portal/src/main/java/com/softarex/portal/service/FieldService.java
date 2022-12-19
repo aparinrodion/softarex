@@ -8,4 +8,10 @@ public interface FieldService {
     Field save(Field field);
 
     List<Field> getFieldsByQuestionnaireId(Long id);
+
+    Field update(Field field);
+
+    void delete(Long id);
+
+    boolean isUserOwnerOfField(String email, Long fieldId);
 }
