@@ -5,7 +5,7 @@ import com.softarex.portal.dto.QuestionnaireDto;
 import com.softarex.portal.mapper.FieldMapper;
 import com.softarex.portal.mapper.QuestionnaireMapper;
 import com.softarex.portal.model.Questionnaire;
-import com.softarex.portal.security.CustomUser;
+import com.softarex.portal.security.CustomUserDetails;
 import com.softarex.portal.service.QuestionnairesService;
 import com.softarex.portal.service.impl.FieldServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +28,9 @@ public class QuestionnairesController {
     @Secured("ROLE_USER")
     @PostMapping
     public QuestionnaireDto save(@RequestBody QuestionnaireDto questionnaireDto, Authentication authentication) {
-        CustomUser customUser = (CustomUser) authentication.getPrincipal();
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
         Questionnaire questionnaire = mapper.mapToEntity(questionnaireDto);
-        Questionnaire savedQuestionnaire = service.save(questionnaire, customUser.getId());
+        Questionnaire savedQuestionnaire = service.save(questionnaire, customUserDetails.getId());
         return mapper.mapToDto(savedQuestionnaire);
     }
 
@@ -46,8 +46,8 @@ public class QuestionnairesController {
     @Secured("ROLE_USER")
     @GetMapping
     public List<QuestionnaireDto> getByAuthor(Authentication authentication) {
-        CustomUser customUser = (CustomUser) authentication.getPrincipal();
-        return service.getByAuthorId(customUser.getId()).stream()
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        return service.getByAuthorId(customUserDetails.getId()).stream()
                 .map(mapper::mapToDto)
                 .toList();
     }
