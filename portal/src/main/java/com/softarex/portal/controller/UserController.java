@@ -10,6 +10,7 @@ import com.softarex.portal.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,6 +51,14 @@ public class UserController {
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
         User user = userMapper.mapToEntity(userDto);
         user = userService.updateUser(user, customUserDetails.getId());
+        return userMapper.mapToDto(user);
+    }
+
+    @Secured("ROLE_USER")
+    @GetMapping(value = "/profile")
+    public UserDto getProfile(Authentication authentication) {
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        User user = userService.getUserById(customUserDetails.getId());
         return userMapper.mapToDto(user);
     }
 }
