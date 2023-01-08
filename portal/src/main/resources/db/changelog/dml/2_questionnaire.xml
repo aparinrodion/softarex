@@ -1,0 +1,103 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="1" author="Rodion">
+        <insert tableName="questionnaires">
+            <column name="id">8</column>
+            <column name="name">New</column>
+            <column name="creation_date">2023-01-08</column>
+            <column name="author_id">1</column>
+        </insert>
+    </changeSet>
+    <changeSet author="Rodion" id="2">
+        <insert tableName="fields">
+            <column name="id">89</column>
+            <column name="label">Name</column>
+            <column name="type">0</column>
+            <column name="is_required">true</column>
+            <column name="is_active">true</column>
+            <column name="questionnaire_id">8</column>
+        </insert>
+    </changeSet>
+    <changeSet author="Rodion" id="3">
+        <insert tableName="fields">
+            <column name="id">90</column>
+            <column name="label">Sex</column>
+            <column name="type">2</column>
+            <column name="is_required">true</column>
+            <column name="is_active">true</column>
+            <column name="questionnaire_id">8</column>
+        </insert>
+    </changeSet>
+    <changeSet author="Rodion" id="4">
+        <insert tableName="fields">
+            <column name="id">92</column>
+            <column name="label">Bio</column>
+            <column name="type">1</column>
+            <column name="is_required">true</column>
+            <column name="is_active">true</column>
+            <column name="questionnaire_id">8</column>
+        </insert>
+    </changeSet>
+    <changeSet author="Rodion" id="5">
+        <insert tableName="fields">
+            <column name="id">93</column>
+            <column name="label">Agreed</column>
+            <column name="type">3</column>
+            <column name="is_required">true</column>
+            <column name="is_active">true</column>
+            <column name="questionnaire_id">8</column>
+        </insert>
+    </changeSet>
+    <changeSet author="Rodion" id="6">
+        <insert tableName="fields">
+            <column name="id">94</column>
+            <column name="label">Country</column>
+            <column name="type">4</column>
+            <column name="is_required">true</column>
+            <column name="is_active">true</column>
+            <column name="questionnaire_id">8</column>
+        </insert>
+    </changeSet>
+    <changeSet author="Rodion" id="7">
+        <insert tableName="fields">
+            <column name="id">95</column>
+            <column name="label">Birth</column>
+            <column name="type">5</column>
+            <column name="is_required">true</column>
+            <column name="is_active">true</column>
+            <column name="questionnaire_id">8</column>
+        </insert>
+    </changeSet>
+    <changeSet author="Rodion" id="8">
+        <insert tableName="option">
+            <column name="name">M</column>
+            <column name="field_id">90</column>
+        </insert>
+    </changeSet>
+    <changeSet author="Rodion" id="9">
+        <insert tableName="option">
+            <column name="name">F</column>
+            <column name="field_id">90</column>
+        </insert>
+    </changeSet>
+    <changeSet author="Rodion" id="10">
+        <insert tableName="option">
+            <column name="name">Belarus</column>
+            <column name="field_id">94</column>
+        </insert>
+    </changeSet>
+    <changeSet author="Rodion" id="11">
+        <insert tableName="option">
+            <column name="name">Ukraine</column>
+            <column name="field_id">94</column>
+        </insert>
+    </changeSet>
+    <changeSet author="Rodion" id="12">
+        <insert tableName="option">
+            <column name="name">Poland</column>
+            <column name="field_id">94</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
