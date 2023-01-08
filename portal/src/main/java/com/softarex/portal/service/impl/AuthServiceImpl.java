@@ -52,7 +52,6 @@ public class AuthServiceImpl implements AuthService {
             user.setPassword(passwordEncoder.encode(newPassword));
             mailSender.sendMessage(email, "Password has been changed", "New password");
         } else {
-            mailSender.sendMessage(email, "Attempt to change password", "New password");
             throw new WrongLoginCredentialsException("Password doesnt match");
         }
     }
