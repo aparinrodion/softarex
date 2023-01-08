@@ -40,6 +40,9 @@ public class AuthServiceImpl implements AuthService {
         user.setRoles(Set.of(new Role(1L, "USER")));
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+        mailSender.sendMessage(user.getEmail(),
+                "Congratulations, you have successfully registered",
+                "Registration");
         return userService.save(user);
     }
 
@@ -52,7 +55,6 @@ public class AuthServiceImpl implements AuthService {
             user.setPassword(passwordEncoder.encode(newPassword));
             mailSender.sendMessage(email, "Password has been changed", "New password");
         } else {
-            mailSender.sendMessage(email, "Attempt to change password", "New password");
             throw new WrongLoginCredentialsException("Password doesnt match");
         }
     }
