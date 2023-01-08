@@ -10,15 +10,13 @@ import com.softarex.portal.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/users")
 public class UserController {
     private final UserMapper userMapper;
     private final AuthService authService;
@@ -38,7 +36,7 @@ public class UserController {
     }
 
     @Secured("ROLE_USER")
-    @PostMapping(value = "/password")
+    @PostMapping(value = "/change-password/")
     public void changePassword(@RequestBody ResetPasswordDto resetPasswordDto, Principal principal) {
         authService.changePassword(principal.getName(),
                 resetPasswordDto.getOldPassword(),
@@ -46,7 +44,7 @@ public class UserController {
     }
 
     @Secured("ROLE_USER")
-    @PostMapping(value = "/update")
+    @PostMapping(value = "/profile/update")
     public UserDto updateUserInfo(@RequestBody UserDto userDto, Authentication authentication) {
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
         User user = userMapper.mapToEntity(userDto);

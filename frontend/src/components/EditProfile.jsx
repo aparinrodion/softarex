@@ -20,7 +20,7 @@ const EditProfile = () => {
             email,
             phoneNumber
         }
-        axios.post("http://localhost:8080/update", newUser, {
+        axios.post("http://localhost:8080/users/profile/update", newUser, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }
@@ -42,7 +42,7 @@ const EditProfile = () => {
     };
 
     function loadProfile() {
-        axios.get("http://localhost:8080/profile", {
+        axios.get("http://localhost:8080/users/profile/", {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }

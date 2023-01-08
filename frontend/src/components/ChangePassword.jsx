@@ -30,7 +30,7 @@ const ChangePassword = () => {
         } else {
             let data =
                 JSON.stringify({oldPassword, newPassword})
-            axios.post("http://localhost:8080/password", data, {
+            axios.post("http://localhost:8080/users/change-password/", data, {
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("token"),
                     'Content-Type': 'application/json',
